@@ -1,6 +1,6 @@
 # AgriVaidya
 
-Flask field-operations backend for the AgriBot. It preserves the existing vanilla frontend API and defaults to safe simulation when hardware is absent.
+Flask field-operations backend for the AgriBot. It preserves the existing  frontend API and defaults to safe simulation when hardware is absent.
 
 ## Windows development
 
@@ -20,7 +20,7 @@ Run tests: python -m pytest -q
 
 Install Python 3.10+, git, libopencv-dev, and the system packages needed by selected camera, serial, I2C, 1-Wire, and GPIO libraries. Create a virtual environment, install requirements.txt, then install optional hardware packages appropriate for the Pi. Enable I2C/1-Wire and grant the service access to serial/GPIO devices. Configure PIXHAWK_CONNECTION_STRING, NPK_SERIAL_PORT, calibrated GPIO values, model paths, and camera sources in .env. Set SIMULATION_MODE=false only after bench testing.
 
-Run python app.py, or use a systemd service with this folder as WorkingDirectory and the virtualenv Python as ExecStart.
+Run python app.py, or use a system service with this folder as WorkingDirectory and the virtualenv Python as ExecStart.
 
 ## Hardware notes
 
