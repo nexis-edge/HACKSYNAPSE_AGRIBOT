@@ -1,0 +1,12 @@
+Implemented Autonomous Feature in the robot.
+connected all the sensors.
+Testing & Calibration of each sensor using test codes.
+fixed the FC controller Board to the robot.
+Established Connection between Raspberry Pi , Pixhawk & Arduino Mega.
+Calibreated the robot using mission planner software.
+Tested ROS 2 Python file.
+Implemented Puthon file into the raspbberry pi.
+Flashed the C++ file to the Arduino.
+Implemented frontend & Backend file.
+Calculated power loss using various parameters and estimated flight time.
+Analysis of Soil data and soil collection.
