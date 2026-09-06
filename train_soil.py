@@ -1,24 +1,3 @@
-#!/usr/bin/env python3
-"""
-AgriVaidya Soil Classifier Training Script
-===========================================
-
-This script trains the soil classifier independently from the main app.
-It extracts features from soil images and saves a trained model to:
-    models/soil/soil_features.pkl
-    models/soil/soil_info.json
-
-Usage:
-    python train_soil.py
-
-Make sure you have the soil dataset in:
-    data/Soil Types/
-        ├── Alluvial soil/
-        ├── Clayey soils/
-        ├── Laterite soil/
-        └── ... (other soil types)
-"""
-
 import cv2
 import json
 import pickle
@@ -119,17 +98,17 @@ def load_training_data():
     training_data = defaultdict(list)
     
     if not DATA_DIR.exists():
-        print(f"❌ Dataset directory not found: {DATA_DIR}")
+        print(f" Dataset directory not found: {DATA_DIR}")
         return None
     
-    print(f"📁 Loading training data from: {DATA_DIR}")
+    print(f"Loading training data from: {DATA_DIR}")
     
     for soil_type_dir in DATA_DIR.iterdir():
         if not soil_type_dir.is_dir():
             continue
         
         soil_type = soil_type_dir.name
-        print(f"\n  🌾 Processing: {soil_type}")
+        print(f"\nProcessing: {soil_type}")
         
         image_count = 0
         for img_file in soil_type_dir.glob("*"):
@@ -147,16 +126,16 @@ def load_training_data():
                     image_count += 1
                     
             except Exception as e:
-                print(f"    ⚠️  Error processing {img_file.name}: {e}")
+                print(f"Error processing {img_file.name}: {e}")
                 continue
         
         if image_count > 0:
             print(f"    ✓ Loaded {image_count} images")
         else:
-            print(f"    ⚠️  No valid images found")
+            print(f"No valid images found")
     
     if not training_data:
-        print("\n❌ No training data loaded!")
+        print("\nNo training data loaded!")
         return None
     
     return training_data
@@ -211,7 +190,7 @@ def save_model(soil_features, metadata):
     # Create model directory
     MODEL_DIR.mkdir(parents=True, exist_ok=True)
     
-    print(f"\n💾 Saving model to: {MODEL_DIR}")
+    print(f"\nSaving model to: {MODEL_DIR}")
     
     # Save features using pickle
     try:
@@ -219,7 +198,7 @@ def save_model(soil_features, metadata):
             pickle.dump(soil_features, f)
         print(f"✓ Features saved: {FEATURES_FILE.name}")
     except Exception as e:
-        print(f"❌ Error saving features: {e}")
+        print(f" Error saving features: {e}")
         return False
     
     # Save soil info and metadata
@@ -232,7 +211,7 @@ def save_model(soil_features, metadata):
             json.dump(model_data, f, indent=2)
         print(f"✓ Info saved: {INFO_FILE.name}")
     except Exception as e:
-        print(f"❌ Error saving info: {e}")
+        print(f" Error saving info: {e}")
         return False
     
     return True
@@ -241,13 +220,13 @@ def save_model(soil_features, metadata):
 def main():
     """Main training pipeline"""
     print("\n" + "="*60)
-    print("🌾 AgriVaidya Soil Classifier Training")
+    print("AgriVaidya Soil Classifier Training")
     print("="*60)
     
     # Load training data
     training_data = load_training_data()
     if not training_data:
-        print("\n❌ Training failed: No training data available")
+        print("\n Training failed: No training data available")
         return False
     
     # Train model
@@ -256,14 +235,14 @@ def main():
     # Save model
     if save_model(soil_features, metadata):
         print("\n" + "="*60)
-        print("✅ Training completed successfully!")
+        print(" Training completed successfully!")
         print("="*60)
         print(f"\nThe soil classifier is ready to use.")
         print(f"Model location: {MODEL_DIR}")
         print(f"Total training samples: {metadata['total_samples']}")
         return True
     else:
-        print("\n❌ Failed to save model")
+        print("\nFailed to save model")
         return False
 
 
